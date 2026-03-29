@@ -1436,6 +1436,82 @@ AURORA BACKGROUND LAYERS
             border-top: 1px solid var(--border);
             margin-top: 0
         }
+        /* ── PROJECT ACTIONS (always visible) ── */
+        
+        .proj-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: .6rem;
+            padding: .8rem 0 .4rem;
+            position: relative;
+            z-index: 5
+        }
+        
+        .proj-live-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .5rem 1.1rem;
+            background: linear-gradient(135deg, var(--ember), var(--gold));
+            color: #000;
+            font-family: var(--font-code);
+            font-size: .76rem;
+            font-weight: 800;
+            letter-spacing: .07em;
+            border-radius: 5px;
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: opacity .2s, transform .2s;
+            position: relative;
+            z-index: 5
+        }
+        
+        .proj-live-btn:hover {
+            opacity: .85;
+            transform: translateY(-1px)
+        }
+        
+        .proj-gh-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .5rem 1.1rem;
+            background: transparent;
+            color: var(--muted);
+            font-family: var(--font-code);
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .07em;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all .2s;
+            position: relative;
+            z-index: 5
+        }
+        
+        .proj-gh-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold)
+        }
+        
+        .proj-safe-note {
+            font-family: var(--font-code);
+            font-size: .62rem;
+            color: var(--muted);
+            letter-spacing: .03em;
+            line-height: 1.5;
+            width: 100%
+        }
+        
+        .proj-safe-note em {
+            color: var(--gold);
+            font-style: normal
+        }
         /* ══════════════════════════════════════════════
    EXPERIENCE + ACHIEVEMENTS + LEADERSHIP
 ══════════════════════════════════════════════ */
@@ -2353,19 +2429,14 @@ AURORA BACKGROUND LAYERS
         }
         /* ══════════════════════════════════════════════
    RESPONSIVE — FULL DEVICE COVERAGE
-   1400px → 1100px → 900px → 768px → 480px → 360px
+   1400 → 1100 → 900 → 768 → 480 → 360
 ══════════════════════════════════════════════ */
-        /* ── 1400px: Wide desktop tighten ── */
         
         @media(max-width:1400px) {
             .section {
                 padding: 6rem 4rem
             }
-            .hero-name {
-                font-size: clamp(4rem, 13vw, 11rem)
-            }
         }
-        /* ── 1100px: Tablet landscape / small desktop ── */
         
         @media(max-width:1100px) {
             .section {
@@ -2397,24 +2468,11 @@ AURORA BACKGROUND LAYERS
             .tools-mosaic {
                 grid-template-columns: repeat(4, 1fr)
             }
-            .about-stats {
-                flex-wrap: wrap
-            }
-            .about-stat {
-                min-width: 80px
-            }
         }
-        /* ── 900px: Tablet portrait ── */
         
         @media(max-width:900px) {
             .section {
-                padding: 4.5rem 2.5rem
-            }
-            .s-title {
-                font-size: clamp(2.2rem, 6vw, 4rem)
-            }
-            .hero-name {
-                font-size: clamp(3.8rem, 14vw, 8rem)
+                padding: 4.5rem 2.2rem
             }
             .certs-grid {
                 grid-template-columns: 1fr
@@ -2424,22 +2482,13 @@ AURORA BACKGROUND LAYERS
                 gap: .5rem
             }
             .newsletter-form {
-                flex-direction: column;
-                border-radius: 8px
+                flex-direction: column
             }
             .newsletter-input {
-                border-radius: 6px 6px 0 0;
-                padding: 1rem
+                border-radius: 0
             }
             .newsletter-btn {
-                border-radius: 0 0 6px 6px;
-                padding: .9rem
-            }
-            .about-stats {
-                gap: 0
-            }
-            .about-stat {
-                flex: 1 1 30%
+                border-radius: 0
             }
             .exp-timeline {
                 padding-left: 2rem
@@ -2448,15 +2497,14 @@ AURORA BACKGROUND LAYERS
                 left: -2.6rem
             }
         }
-        /* ── 768px: Mobile landscape / small tablet ── */
         
         @media(max-width:768px) {
-            /* Nav */
+            /* ── Nav ── */
             #nav {
-                padding: 1.1rem 1.4rem
+                padding: 1rem 1.2rem
             }
             #nav.solid {
-                padding: .85rem 1.4rem
+                padding: .8rem 1.2rem
             }
             .nav-links,
             .nav-hire,
@@ -2466,146 +2514,162 @@ AURORA BACKGROUND LAYERS
             .hamburger {
                 display: flex
             }
-            /* Hero */
+            /* ── Hero ── */
             #hero {
-                padding: 0 1.4rem 6vh;
+                padding: 0 1.2rem 8vh;
                 min-height: 100svh
             }
             .hero-inner {
                 grid-template-columns: 1fr;
-                gap: 1.5rem
+                gap: 1rem
             }
             .hero-right {
                 display: none
             }
             .hero-name {
-                font-size: clamp(3.5rem, 16vw, 7rem);
+                font-size: clamp(3.5rem, 15vw, 6.5rem);
                 line-height: .9
             }
             .hero-sub {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 1rem
+                gap: .8rem
             }
             .hero-sub p {
-                font-size: .95rem;
+                font-size: .9rem;
                 max-width: 100%
             }
             .hero-scroll {
-                bottom: 1.5rem
+                bottom: 2rem
             }
-            /* Sections */
+            /* ── Sections ── */
             .section {
-                padding: 4rem 1.4rem
+                padding: 4rem 1.2rem
             }
             .section-head {
-                margin-bottom: 3rem
+                margin-bottom: 2.5rem
             }
-            /* About */
+            .s-title {
+                font-size: clamp(2rem, 8vw, 3.5rem)
+            }
+            /* ── About ── */
             .about-statement {
-                font-size: clamp(1.1rem, 4vw, 1.5rem)
+                font-size: clamp(1rem, 4.5vw, 1.4rem)
+            }
+            .about-body {
+                font-size: .88rem
             }
             .about-stats {
                 flex-direction: row;
-                flex-wrap: wrap
+                flex-wrap: wrap;
+                gap: 0
             }
             .about-stat {
-                flex: 1 1 calc(33% - 1px);
-                min-width: 70px;
-                padding: .9rem .7rem
+                flex: 1 1 30%;
+                min-width: 60px;
+                padding: .8rem .5rem
             }
             .about-stat-num {
-                font-size: 1.6rem
+                font-size: 1.5rem
             }
             .about-stat-label {
-                font-size: .52rem
+                font-size: .5rem
             }
             .currently-building {
                 flex-direction: column;
-                gap: .6rem
+                gap: .5rem
             }
             .about-tags {
-                gap: .4rem
+                gap: .35rem
             }
             .about-tag {
-                font-size: .65rem;
-                padding: .28rem .7rem
+                font-size: .63rem;
+                padding: .25rem .65rem
             }
-            /* Education timeline */
             .edu-timeline {
-                padding-left: 1.8rem
+                padding-left: 1.6rem
             }
             .edu-tl-dot {
-                left: -2.4rem
+                left: -2.2rem
             }
             .edu-tl-card {
-                padding: 1.1rem 1.2rem
+                padding: 1rem 1.1rem
             }
-            .edu-deg {
-                font-size: .9rem
-            }
-            /* Projects */
+            /* ── Projects ── */
             .proj-row {
-                grid-template-columns: 1fr;
-                padding: 1.5rem 0;
-                gap: .8rem
+                display: flex;
+                flex-direction: column;
+                padding: 1.4rem 0;
+                gap: .5rem
+            }
+            .proj-row:hover {
+                padding-left: 0
             }
             .proj-num {
-                font-size: 2.2rem;
-                min-width: auto
+                font-size: 2rem;
+                min-width: auto;
+                line-height: 1
             }
             .proj-name {
-                font-size: clamp(1.4rem, 5vw, 2rem)
+                font-size: clamp(1.3rem, 5vw, 1.9rem)
             }
             .proj-right {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                flex-wrap: wrap;
-                gap: .6rem;
-                padding-bottom: .5rem
+                display: none
             }
-            .proj-arrow {
-                width: 36px;
-                height: 36px;
-                font-size: .9rem
+            .proj-actions {
+                padding: .6rem 0 .2rem
+            }
+            .proj-live-btn {
+                font-size: .72rem;
+                padding: .48rem .95rem
+            }
+            .proj-gh-btn {
+                font-size: .68rem;
+                padding: .48rem .85rem
+            }
+            .proj-safe-note {
+                font-size: .58rem
             }
             .proj-detail {
                 padding-left: 0
             }
             .proj-row.expanded .proj-detail {
-                max-height: 300px
+                max-height: 400px
             }
             .proj-stack {
-                gap: .3rem
+                gap: .25rem
             }
             .proj-pill {
-                font-size: .56rem
+                font-size: .55rem
             }
-            /* Skills */
-            .skills-layout {
-                gap: 2.5rem
-            }
+            /* ── Skills ── */
             .tools-mosaic {
                 grid-template-columns: repeat(3, 1fr)
             }
-            /* Experience */
+            .skills-layout {
+                gap: 2rem
+            }
+            /* ── Experience ── */
             .exp-timeline {
-                padding-left: 1.8rem
+                padding-left: 1.6rem
             }
             .exp-tl-node {
-                left: -2.4rem;
+                left: -2.2rem;
                 width: 18px;
                 height: 18px;
                 font-size: .55rem
             }
             .exp-card {
-                padding: 1.5rem
+                padding: 1.4rem
             }
             .exp-role {
                 font-size: 1.3rem
             }
-            /* Achievements */
+            .subsection-title {
+                font-size: clamp(1.4rem, 5vw, 2rem);
+                margin-top: 2.5rem
+            }
+            /* ── Achievements ── */
             .ach-grid {
                 grid-template-columns: 1fr;
                 gap: .6rem
@@ -2616,189 +2680,143 @@ AURORA BACKGROUND LAYERS
             .school-grid {
                 grid-template-columns: repeat(2, 1fr)
             }
-            /* Certs */
             .certs-grid {
                 grid-template-columns: 1fr
             }
-            /* Contact */
+            /* ── Contact ── */
+            .contact-headline {
+                font-size: clamp(2rem, 8vw, 4rem)
+            }
             .contact-links {
                 margin: 0
             }
-            .contact-headline {
-                font-size: clamp(2.2rem, 8vw, 4.5rem)
+            .contact-link-row {
+                padding: 1rem 1.2rem
             }
             .clr-icon {
                 width: 44px;
-                font-size: .65rem
+                font-size: .62rem
             }
             .clr-val {
-                font-size: .85rem
+                font-size: .82rem
             }
-            /* Newsletter */
+            /* ── Newsletter ── */
+            .newsletter-form {
+                max-width: 100%
+            }
             .newsletter-benefits {
-                gap: .8rem
+                gap: .7rem
             }
-            /* Footer */
+            /* ── Footer ── */
             footer {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 1.8rem 1.4rem;
-                gap: .8rem
-            }
-            /* Marquee */
-            .marquee-item span {
-                font-size: .85rem
+                padding: 1.8rem 1.2rem;
+                gap: .7rem
             }
         }
-        /* ── 480px: Mobile portrait standard ── */
         
         @media(max-width:480px) {
-            /* Nav */
             #nav {
-                padding: 1rem 1.1rem
+                padding: .9rem 1rem
             }
             .nav-logo {
                 font-size: 1.4rem
             }
-            /* Hero */
             #hero {
-                padding: 0 1.1rem 5vh
+                padding: 0 1rem 6vh
             }
             .hero-name {
-                font-size: clamp(3rem, 18vw, 5.5rem)
+                font-size: clamp(2.8rem, 17vw, 4.5rem)
             }
             .hero-eyebrow span {
-                font-size: .62rem
+                font-size: .6rem
             }
-            .hero-sub p {
-                font-size: .88rem
-            }
-            /* Sections */
             .section {
-                padding: 3.5rem 1.1rem
+                padding: 3.2rem 1rem
             }
             .s-title {
-                font-size: clamp(2rem, 9vw, 3rem)
-            }
-            .s-index {
-                font-size: .65rem
-            }
-            /* About */
-            .about-statement {
-                font-size: clamp(1rem, 4.5vw, 1.3rem)
-            }
-            .about-body {
-                font-size: .88rem
+                font-size: clamp(1.8rem, 9vw, 2.8rem)
             }
             .about-stat {
-                flex: 1 1 calc(50% - 1px)
+                flex: 1 1 calc(33% - 1px)
             }
             .about-stat-num {
-                font-size: 1.4rem
+                font-size: 1.3rem
             }
             .about-philosophy {
-                font-size: .92rem;
-                padding: .9rem 1rem
+                font-size: .88rem;
+                padding: .85rem .95rem
             }
             .cb-text {
-                font-size: .7rem
+                font-size: .68rem
             }
-            /* Projects */
-            .proj-row {
-                gap: .6rem
-            }
-            .proj-name {
-                font-size: clamp(1.2rem, 5.5vw, 1.8rem)
-            }
-            .proj-right {
-                flex-direction: column;
-                align-items: flex-start
-            }
-            /* Skills */
             .tools-mosaic {
                 grid-template-columns: repeat(2, 1fr)
             }
             .sk-tag {
-                font-size: .72rem;
-                padding: .3rem .7rem
+                font-size: .7rem;
+                padding: .28rem .65rem
             }
-            /* Experience */
             .exp-card {
-                padding: 1.2rem
+                padding: 1.1rem
             }
             .exp-role {
                 font-size: 1.1rem
             }
             .exp-pts li {
-                font-size: .8rem
-            }
-            .subsection-title {
-                font-size: clamp(1.4rem, 5vw, 2rem);
-                margin-top: 2.5rem
-            }
-            /* Achievements */
-            .ach-item {
-                padding: 1rem 1.1rem
+                font-size: .78rem
             }
             .school-grid {
                 grid-template-columns: 1fr
             }
-            /* Contact */
+            .ach-item {
+                padding: .9rem 1rem
+            }
             .contact-link-row {
-                padding: 1rem 1.2rem
+                padding: .9rem 1rem
             }
             .contact-link-row:hover {
-                padding-left: 1.4rem
-            }
-            .clr-val {
-                font-size: .8rem
-            }
-            /* Newsletter */
-            .newsletter-form {
-                max-width: 100%
+                padding-left: 1.2rem
             }
             .newsletter-sub {
-                font-size: .85rem
+                font-size: .83rem
             }
-            /* GitHub cards in about */
-            .edu-timeline img {
-                border-radius: 3px
+            footer {
+                padding: 1.5rem 1rem
             }
-            /* Live preview button */
-            .proj-right a[href*="infinityfreeapp"],
-            .proj-right a[href*="github.io"] {
-                font-size: .72rem;
-                padding: .45rem .8rem
+            .proj-live-btn {
+                font-size: .68rem;
+                padding: .42rem .85rem
             }
         }
-        /* ── 360px: Small Android phones ── */
         
         @media(max-width:360px) {
             #nav {
-                padding: .9rem 1rem
+                padding: .8rem .9rem
             }
             .nav-logo {
-                font-size: 1.25rem
+                font-size: 1.2rem
             }
             #hero {
-                padding: 0 1rem 4vh
+                padding: 0 .9rem 5vh
             }
             .hero-name {
-                font-size: clamp(2.6rem, 20vw, 4.5rem)
+                font-size: clamp(2.4rem, 19vw, 3.8rem)
             }
             .section {
-                padding: 3rem 1rem
+                padding: 3rem .9rem
             }
             .s-title {
-                font-size: clamp(1.8rem, 10vw, 2.6rem)
+                font-size: clamp(1.6rem, 10vw, 2.4rem)
+            }
+            .about-stats {
+                flex-direction: column
             }
             .about-stat {
                 flex: 1 1 100%;
                 border-right: none;
                 border-bottom: 1px solid var(--border)
-            }
-            .about-stats {
-                flex-direction: column
             }
             .tools-mosaic {
                 grid-template-columns: repeat(2, 1fr)
@@ -2810,35 +2828,33 @@ AURORA BACKGROUND LAYERS
                 grid-template-columns: 1fr
             }
             .contact-headline {
-                font-size: clamp(1.8rem, 10vw, 3rem)
+                font-size: clamp(1.6rem, 10vw, 2.5rem)
             }
             .exp-role {
                 font-size: 1rem
             }
             .proj-name {
-                font-size: clamp(1.1rem, 6vw, 1.6rem)
+                font-size: clamp(1.1rem, 6vw, 1.5rem)
+            }
+            .proj-live-btn,
+            .proj-gh-btn {
+                font-size: .64rem;
+                padding: .38rem .75rem
             }
             footer {
-                padding: 1.5rem 1rem
+                padding: 1.2rem .9rem
             }
         }
-        /* ── Touch devices: disable hover-only transforms ── */
+        /* ── Touch devices: kill hover effects ── */
         
         @media(hover:none) {
-            .edu-tl-card:hover {
-                transform: none
-            }
-            .exp-card:hover {
-                transform: none
-            }
-            .ach-item:hover {
-                transform: none
-            }
-            .tool-box:hover {
-                transform: none
-            }
+            .edu-tl-card:hover,
+            .exp-card:hover,
+            .ach-item:hover,
+            .tool-box:hover,
             .act-card:hover {
-                transform: none
+                transform: none;
+                box-shadow: none
             }
             .proj-row:hover {
                 padding-left: 0
@@ -2846,9 +2862,7 @@ AURORA BACKGROUND LAYERS
             body {
                 cursor: auto
             }
-            button {
-                cursor: pointer
-            }
+            button,
             a {
                 cursor: pointer
             }
@@ -3057,14 +3071,6 @@ AURORA BACKGROUND LAYERS
                         <div class="about-stat">
                             <div class="about-stat-num">5+</div>
                             <div class="about-stat-label">Projects Shipped</div>
-                        </div>
-                        <div class="about-stat">
-                            <div class="about-stat-num">1k+</div>
-                            <div class="about-stat-label">Students Led</div>
-                        </div>
-                        <div class="about-stat">
-                            <div class="about-stat-num">3</div>
-                            <div class="about-stat-label">Hackathons</div>
                         </div>
                         <div class="about-stat">
                             <div class="about-stat-num">5</div>
@@ -3315,22 +3321,16 @@ AURORA BACKGROUND LAYERS
                             <p>Space exploration platform for students & researchers + real-time AI emotion wellbeing companion ( SIH Problem Statement). Detects facial emotions via webcam, responds with empathy in 9 Indian languages using Gemini AI. Built
                                 with Python, Flask, DeepFace, PHP, MySQL & WebSocket. Open source. Made in BHARAT</p>
                         </div>
+                        <!-- Live preview always visible -->
+                        <div class="proj-actions" onclick="event.stopPropagation()">
+                            <a href="http://orbitx.infinityfreeapp.com/" target="_blank" class="proj-live-btn">↗ Live Preview</a>
+                            <a href="https://github.com/ivengexnce/Space-Explorer-AI-Wellbeing" target="_blank" class="proj-gh-btn">GitHub ↗</a>
+                            <span class="proj-safe-note">⚠ Browser may warn "unsafe" — 100% safe. Click <em>Advanced → Proceed</em></span>
+                        </div>
                     </div>
                     <div class="proj-right">
                         <a href="https://github.com/ivengexnce/Space-Explorer-AI-Wellbeing" target="_blank" class="proj-arrow" onclick="event.stopPropagation()">↗</a>
                         <span class="proj-year">2026</span>
-                        <a href="http://orbitx.infinityfreeapp.com/" onclick="openPreview('http://orbitx.infinityfreeapp.com/',event)" style="display:flex;align-items:center;gap:.45rem;margin-top:.5rem;padding:.55rem 1rem;background:linear-gradient(135deg,var(--ember),var(--gold));color:#000;font-family:var(--font-code);font-size:.78rem;font-weight:800;letter-spacing:.08em;border-radius:5px;text-decoration:none;transition:opacity .2s;white-space:nowrap;position:relative;z-index:10;cursor:pointer"
-                            onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-                            ↗ Live Preview
-                        </a>
-                        <div onclick="event.stopPropagation()" style="margin-top:.55rem;padding:.65rem .85rem;background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2);border-radius:5px;max-width:220px">
-                            <div style="font-family:var(--font-code);font-size:.65rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;display:flex;align-items:center;gap:.35rem">
-                                <span style="width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block;opacity:.8"></span> Safe to visit
-                            </div>
-                            <div style="font-size:.75rem;color:var(--muted);line-height:1.6">
-                                Browser may warn "unsafe" — it's <strong style="color:#fff">100% safe</strong>. Click <em style="color:var(--gold)">Advanced → Proceed</em> to continue.
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -3347,14 +3347,14 @@ AURORA BACKGROUND LAYERS
                         <div class="proj-detail">
                             <p>Sustainable fashion platform enabling peer-to-peer pre-owned clothing swaps. Responsive UI with full authentication system — promoting circular economy values through clean, functional web design.</p>
                         </div>
+                        <div class="proj-actions" onclick="event.stopPropagation()">
+                            <a href="https://ivengexnce.github.io/C-Thriftier/" target="_blank" class="proj-live-btn">↗ Live Preview</a>
+                            <a href="https://github.com/ivengexnce/C-Thriftier" target="_blank" class="proj-gh-btn">GitHub ↗</a>
+                        </div>
                     </div>
                     <div class="proj-right">
                         <a href="https://github.com/ivengexnce/C-Thriftier" target="_blank" class="proj-arrow" onclick="event.stopPropagation()">↗</a>
                         <span class="proj-year">2025</span>
-                        <a href="https://ivengexnce.github.io/C-Thriftier/" onclick="openPreview('https://ivengexnce.github.io/C-Thriftier/',event)" style="display:flex;align-items:center;gap:.45rem;margin-top:.5rem;padding:.55rem 1rem;background:linear-gradient(135deg,var(--ember),var(--gold));color:#000;font-family:var(--font-code);font-size:.78rem;font-weight:800;letter-spacing:.08em;border-radius:5px;text-decoration:none;transition:opacity .2s;white-space:nowrap;position:relative;z-index:10;cursor:pointer"
-                            onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-                            ↗ Live Preview
-                        </a>
                     </div>
                 </div>
 
@@ -4186,10 +4186,12 @@ AURORA BACKGROUND LAYERS
                             ci = 0;
                             del = false;
                             wi = (wi + 1) % words.length;
+                            setTimeout(tick, 500);
+                            return
                         }
                     }
-                    el.innerHTML = `-- <em style="color:white); font-style:semi-bold ; text-color:white; font-family:times new roman">${w.slice(0,ci)}<span style="border-right : 2px solid white; animation : blink 1s infinite; margin-left:1px">&nbsp;</span></em> &middot;`;
                     el.textContent = w.slice(0, ci);
+                    el.innerHTML = `-- <em style="color:white); font-style:semi-bold ; text-color:white; font-family:times new roman">${w.slice(0,ci)}<span style="border-right : 2px solid white; animation : blink 1s infinite; margin-left:1px">&nbsp;</span></em> &middot;`;
                     setTimeout(tick, del ? 80 : 120);
                 }
                 init();
