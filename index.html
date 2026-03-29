@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
+    <meta name="theme-color" content="#020209" />
     <title>Meet Maru — AI Builder · Developer · Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
@@ -47,7 +48,8 @@ FOUNDATIONS — LUXURY PREMIUM PALETTE
         html {
             scroll-behavior: smooth;
             font-size: 16px;
-            overflow-x: hidden
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%
         }
         
         body {
@@ -56,7 +58,9 @@ FOUNDATIONS — LUXURY PREMIUM PALETTE
             font-family: var(--font-body);
             cursor: none;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased
+            -webkit-font-smoothing: antialiased;
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right)
         }
         
         a {
@@ -2348,36 +2352,111 @@ AURORA BACKGROUND LAYERS
             transition-delay: .5s
         }
         /* ══════════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — FULL DEVICE COVERAGE
+   1400px → 1100px → 900px → 768px → 480px → 360px
 ══════════════════════════════════════════════ */
+        /* ── 1400px: Wide desktop tighten ── */
+        
+        @media(max-width:1400px) {
+            .section {
+                padding: 6rem 4rem
+            }
+            .hero-name {
+                font-size: clamp(4rem, 13vw, 11rem)
+            }
+        }
+        /* ── 1100px: Tablet landscape / small desktop ── */
         
         @media(max-width:1100px) {
+            .section {
+                padding: 5rem 3rem
+            }
             .about-grid {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
+                gap: 3.5rem
             }
             .skills-layout {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
+                gap: 3rem
             }
             .exp-grid {
                 grid-template-columns: 1fr
             }
             .certs-grid {
-                grid-template-columns: 1fr
+                grid-template-columns: repeat(2, 1fr)
             }
             .ach-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+            .activities-grid {
                 grid-template-columns: repeat(2, 1fr)
             }
             .school-grid {
                 grid-template-columns: repeat(2, 1fr)
             }
+            .tools-mosaic {
+                grid-template-columns: repeat(4, 1fr)
+            }
+            .about-stats {
+                flex-wrap: wrap
+            }
+            .about-stat {
+                min-width: 80px
+            }
         }
+        /* ── 900px: Tablet portrait ── */
+        
+        @media(max-width:900px) {
+            .section {
+                padding: 4.5rem 2.5rem
+            }
+            .s-title {
+                font-size: clamp(2.2rem, 6vw, 4rem)
+            }
+            .hero-name {
+                font-size: clamp(3.8rem, 14vw, 8rem)
+            }
+            .certs-grid {
+                grid-template-columns: 1fr
+            }
+            .exp-card-header {
+                flex-direction: column;
+                gap: .5rem
+            }
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: 8px
+            }
+            .newsletter-input {
+                border-radius: 6px 6px 0 0;
+                padding: 1rem
+            }
+            .newsletter-btn {
+                border-radius: 0 0 6px 6px;
+                padding: .9rem
+            }
+            .about-stats {
+                gap: 0
+            }
+            .about-stat {
+                flex: 1 1 30%
+            }
+            .exp-timeline {
+                padding-left: 2rem
+            }
+            .exp-tl-node {
+                left: -2.6rem
+            }
+        }
+        /* ── 768px: Mobile landscape / small tablet ── */
         
         @media(max-width:768px) {
+            /* Nav */
             #nav {
-                padding: 1.2rem 1.5rem
+                padding: 1.1rem 1.4rem
             }
             #nav.solid {
-                padding: .9rem 1.5rem
+                padding: .85rem 1.4rem
             }
             .nav-links,
             .nav-hire,
@@ -2387,27 +2466,149 @@ AURORA BACKGROUND LAYERS
             .hamburger {
                 display: flex
             }
+            /* Hero */
             #hero {
-                padding: 0 1.5rem 6vh
+                padding: 0 1.4rem 6vh;
+                min-height: 100svh
             }
             .hero-inner {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
+                gap: 1.5rem
             }
             .hero-right {
                 display: none
             }
-            .section {
-                padding: 6rem 1.5rem
+            .hero-name {
+                font-size: clamp(3.5rem, 16vw, 7rem);
+                line-height: .9
             }
+            .hero-sub {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem
+            }
+            .hero-sub p {
+                font-size: .95rem;
+                max-width: 100%
+            }
+            .hero-scroll {
+                bottom: 1.5rem
+            }
+            /* Sections */
+            .section {
+                padding: 4rem 1.4rem
+            }
+            .section-head {
+                margin-bottom: 3rem
+            }
+            /* About */
+            .about-statement {
+                font-size: clamp(1.1rem, 4vw, 1.5rem)
+            }
+            .about-stats {
+                flex-direction: row;
+                flex-wrap: wrap
+            }
+            .about-stat {
+                flex: 1 1 calc(33% - 1px);
+                min-width: 70px;
+                padding: .9rem .7rem
+            }
+            .about-stat-num {
+                font-size: 1.6rem
+            }
+            .about-stat-label {
+                font-size: .52rem
+            }
+            .currently-building {
+                flex-direction: column;
+                gap: .6rem
+            }
+            .about-tags {
+                gap: .4rem
+            }
+            .about-tag {
+                font-size: .65rem;
+                padding: .28rem .7rem
+            }
+            /* Education timeline */
+            .edu-timeline {
+                padding-left: 1.8rem
+            }
+            .edu-tl-dot {
+                left: -2.4rem
+            }
+            .edu-tl-card {
+                padding: 1.1rem 1.2rem
+            }
+            .edu-deg {
+                font-size: .9rem
+            }
+            /* Projects */
             .proj-row {
-                grid-template-columns: auto 1fr;
-                padding: 1.5rem 0
+                grid-template-columns: 1fr;
+                padding: 1.5rem 0;
+                gap: .8rem
+            }
+            .proj-num {
+                font-size: 2.2rem;
+                min-width: auto
+            }
+            .proj-name {
+                font-size: clamp(1.4rem, 5vw, 2rem)
             }
             .proj-right {
-                display: none
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: .6rem;
+                padding-bottom: .5rem
             }
+            .proj-arrow {
+                width: 36px;
+                height: 36px;
+                font-size: .9rem
+            }
+            .proj-detail {
+                padding-left: 0
+            }
+            .proj-row.expanded .proj-detail {
+                max-height: 300px
+            }
+            .proj-stack {
+                gap: .3rem
+            }
+            .proj-pill {
+                font-size: .56rem
+            }
+            /* Skills */
+            .skills-layout {
+                gap: 2.5rem
+            }
+            .tools-mosaic {
+                grid-template-columns: repeat(3, 1fr)
+            }
+            /* Experience */
+            .exp-timeline {
+                padding-left: 1.8rem
+            }
+            .exp-tl-node {
+                left: -2.4rem;
+                width: 18px;
+                height: 18px;
+                font-size: .55rem
+            }
+            .exp-card {
+                padding: 1.5rem
+            }
+            .exp-role {
+                font-size: 1.3rem
+            }
+            /* Achievements */
             .ach-grid {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
+                gap: .6rem
             }
             .activities-grid {
                 grid-template-columns: 1fr
@@ -2415,29 +2616,245 @@ AURORA BACKGROUND LAYERS
             .school-grid {
                 grid-template-columns: repeat(2, 1fr)
             }
-            .contact-links {
-                margin-left: 1rem;
-                margin-right: 1rem
+            /* Certs */
+            .certs-grid {
+                grid-template-columns: 1fr
             }
+            /* Contact */
+            .contact-links {
+                margin: 0
+            }
+            .contact-headline {
+                font-size: clamp(2.2rem, 8vw, 4.5rem)
+            }
+            .clr-icon {
+                width: 44px;
+                font-size: .65rem
+            }
+            .clr-val {
+                font-size: .85rem
+            }
+            /* Newsletter */
+            .newsletter-benefits {
+                gap: .8rem
+            }
+            /* Footer */
             footer {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 2rem 1.5rem
+                padding: 1.8rem 1.4rem;
+                gap: .8rem
+            }
+            /* Marquee */
+            .marquee-item span {
+                font-size: .85rem
             }
         }
+        /* ── 480px: Mobile portrait standard ── */
         
         @media(max-width:480px) {
+            /* Nav */
+            #nav {
+                padding: 1rem 1.1rem
+            }
+            .nav-logo {
+                font-size: 1.4rem
+            }
+            /* Hero */
+            #hero {
+                padding: 0 1.1rem 5vh
+            }
             .hero-name {
-                font-size: clamp(3.5rem, 18vw, 6rem)
+                font-size: clamp(3rem, 18vw, 5.5rem)
+            }
+            .hero-eyebrow span {
+                font-size: .62rem
+            }
+            .hero-sub p {
+                font-size: .88rem
+            }
+            /* Sections */
+            .section {
+                padding: 3.5rem 1.1rem
+            }
+            .s-title {
+                font-size: clamp(2rem, 9vw, 3rem)
+            }
+            .s-index {
+                font-size: .65rem
+            }
+            /* About */
+            .about-statement {
+                font-size: clamp(1rem, 4.5vw, 1.3rem)
+            }
+            .about-body {
+                font-size: .88rem
+            }
+            .about-stat {
+                flex: 1 1 calc(50% - 1px)
+            }
+            .about-stat-num {
+                font-size: 1.4rem
+            }
+            .about-philosophy {
+                font-size: .92rem;
+                padding: .9rem 1rem
+            }
+            .cb-text {
+                font-size: .7rem
+            }
+            /* Projects */
+            .proj-row {
+                gap: .6rem
+            }
+            .proj-name {
+                font-size: clamp(1.2rem, 5.5vw, 1.8rem)
+            }
+            .proj-right {
+                flex-direction: column;
+                align-items: flex-start
+            }
+            /* Skills */
+            .tools-mosaic {
+                grid-template-columns: repeat(2, 1fr)
+            }
+            .sk-tag {
+                font-size: .72rem;
+                padding: .3rem .7rem
+            }
+            /* Experience */
+            .exp-card {
+                padding: 1.2rem
+            }
+            .exp-role {
+                font-size: 1.1rem
+            }
+            .exp-pts li {
+                font-size: .8rem
+            }
+            .subsection-title {
+                font-size: clamp(1.4rem, 5vw, 2rem);
+                margin-top: 2.5rem
+            }
+            /* Achievements */
+            .ach-item {
+                padding: 1rem 1.1rem
+            }
+            .school-grid {
+                grid-template-columns: 1fr
+            }
+            /* Contact */
+            .contact-link-row {
+                padding: 1rem 1.2rem
+            }
+            .contact-link-row:hover {
+                padding-left: 1.4rem
+            }
+            .clr-val {
+                font-size: .8rem
+            }
+            /* Newsletter */
+            .newsletter-form {
+                max-width: 100%
+            }
+            .newsletter-sub {
+                font-size: .85rem
+            }
+            /* GitHub cards in about */
+            .edu-timeline img {
+                border-radius: 3px
+            }
+            /* Live preview button */
+            .proj-right a[href*="infinityfreeapp"],
+            .proj-right a[href*="github.io"] {
+                font-size: .72rem;
+                padding: .45rem .8rem
+            }
+        }
+        /* ── 360px: Small Android phones ── */
+        
+        @media(max-width:360px) {
+            #nav {
+                padding: .9rem 1rem
+            }
+            .nav-logo {
+                font-size: 1.25rem
+            }
+            #hero {
+                padding: 0 1rem 4vh
+            }
+            .hero-name {
+                font-size: clamp(2.6rem, 20vw, 4.5rem)
+            }
+            .section {
+                padding: 3rem 1rem
+            }
+            .s-title {
+                font-size: clamp(1.8rem, 10vw, 2.6rem)
+            }
+            .about-stat {
+                flex: 1 1 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border)
+            }
+            .about-stats {
+                flex-direction: column
             }
             .tools-mosaic {
                 grid-template-columns: repeat(2, 1fr)
             }
-            .certs-grid {
-                grid-template-columns: 1fr
-            }
             .school-grid {
                 grid-template-columns: 1fr
+            }
+            .ach-grid {
+                grid-template-columns: 1fr
+            }
+            .contact-headline {
+                font-size: clamp(1.8rem, 10vw, 3rem)
+            }
+            .exp-role {
+                font-size: 1rem
+            }
+            .proj-name {
+                font-size: clamp(1.1rem, 6vw, 1.6rem)
+            }
+            footer {
+                padding: 1.5rem 1rem
+            }
+        }
+        /* ── Touch devices: disable hover-only transforms ── */
+        
+        @media(hover:none) {
+            .edu-tl-card:hover {
+                transform: none
+            }
+            .exp-card:hover {
+                transform: none
+            }
+            .ach-item:hover {
+                transform: none
+            }
+            .tool-box:hover {
+                transform: none
+            }
+            .act-card:hover {
+                transform: none
+            }
+            .proj-row:hover {
+                padding-left: 0
+            }
+            body {
+                cursor: auto
+            }
+            button {
+                cursor: pointer
+            }
+            a {
+                cursor: pointer
+            }
+            #cur-target,
+            #dragon-cursor {
+                display: none
             }
         }
     </style>
@@ -3769,10 +4186,9 @@ AURORA BACKGROUND LAYERS
                             ci = 0;
                             del = false;
                             wi = (wi + 1) % words.length;
-                            setTimeout(tick, 500);
-                            return;
                         }
                     }
+                    el.innerHTML = `-- <em style="color:white); font-style:semi-bold ; text-color:white; font-family:times new roman">${w.slice(0,ci)}<span style="border-right : 2px solid white; animation : blink 1s infinite; margin-left:1px">&nbsp;</span></em> &middot;`;
                     el.textContent = w.slice(0, ci);
                     setTimeout(tick, del ? 80 : 120);
                 }
