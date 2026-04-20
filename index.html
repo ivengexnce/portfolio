@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
     <meta name="theme-color" content="#020209" />
     <title>Meet Maru | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabinet+Grotesk:wght@300;400;500;700;800;900&family=Fira+Code:wght@400;500&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabinet+Grotesk:wght@300;400;500;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
@@ -35,6 +36,8 @@
             --border2: rgba(212, 168, 67, .06);
             --text: #ede8d8;
             --muted: rgba(237, 232, 216, .45);
+            --cyan: #00e5ff;
+            --pink: #ff2d78;
             --font-hero: 'Bebas Neue', cursive;
             --font-body: 'Cabinet Grotesk', sans-serif;
             --font-code: 'Fira Code', monospace;
@@ -247,78 +250,144 @@
             }
         }
         /* ── PRELOADER ── */
+        /* new with Glitech PRELOADER */
         
         #preloader {
             position: fixed;
             inset: 0;
             z-index: 9990;
+            transition: opacity .6s ease, visibility .6s ease;
             background: var(--c0);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 1.5rem;
-        }
-        
-        #preloader .pre-dragon {
-            font-size: 4rem;
-            animation: dragonBreath 1.2s ease infinite alternate;
-            filter: drop-shadow(0 0 20px rgba(255, 100, 20, .8));
-        }
-        
-        @keyframes dragonBreath {
-            0% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 20px rgba(255, 100, 20, .8));
-            }
-            100% {
-                transform: scale(1.08);
-                filter: drop-shadow(0 0 35px rgba(212, 168, 67, 1));
-            }
-        }
-        
-        #preloader .pre-name {
-            font-family: var(--font-hero);
-            font-size: clamp(3.5rem, 10vw, 7rem);
-            letter-spacing: .08em;
-            color: transparent;
-            -webkit-text-stroke: 1px var(--gold);
-            line-height: 1;
-            text-align: center;
-        }
-        
-        #preloader .pre-bar-wrap {
-            width: 220px;
-            height: 1px;
-            background: rgba(255, 255, 255, .08);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        #preloader .pre-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--ember), var(--gold), var(--gold2));
-            width: 0%;
-            transition: width .05s linear;
-            box-shadow: 0 0 10px rgba(212, 168, 67, .8);
-        }
-        
-        #preloader .pre-pct {
-            font-family: var(--font-code);
-            font-size: .78rem;
-            color: var(--gold);
-            letter-spacing: .2em;
+            gap: 2rem
         }
         
         #preloader.done {
-            animation: fadeOut .7s ease forwards;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
         
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                pointer-events: none;
-                visibility: hidden;
+        .pre-logo {
+            font-family: 'Orbitron', monospace;
+            /* add this line */
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: .15em;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--cyan);
+            animation: preGlow 1.5s ease infinite alternate
+        }
+        
+        @keyframes preGlow {
+            0% {
+                text-shadow: 0 0 30px rgba(0, 229, 255, .3)
+            }
+            100% {
+                text-shadow: 0 0 60px rgba(0, 229, 255, .8), 0 0 100px rgba(0, 229, 255, .4)
+            }
+        }
+        
+        .pre-sub {
+            font-family: var(--font-code);
+            font-size: .75rem;
+            letter-spacing: .3em;
+            color: var(--cyan);
+            opacity: .7;
+            text-transform: uppercase
+        }
+        
+        .pre-bar-wrap {
+            width: 300px;
+            height: 1px;
+            background: rgba(255, 255, 255, .06);
+            position: relative;
+            overflow: hidden
+        }
+        
+        .pre-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyan), var(--gold));
+            width: 0%;
+            transition: width .05s linear;
+            box-shadow: 0 0 15px rgba(0, 229, 255, .8)
+        }
+        
+        .pre-pct {
+            font-family: var(--font-code);
+            font-size: .7rem;
+            color: var(--cyan);
+            letter-spacing: .2em
+        }
+        
+        .pre-scanlines {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, .08) 2px, rgba(0, 0, 0, .08) 4px);
+            pointer-events: none
+        }
+        /*---------------glitch effectimp--------------------*/
+        
+        .glitch {
+            position: relative;
+            display: inline-block
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%
+        }
+        
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--cyan);
+            animation: glitch1 3s infinite linear
+        }
+        
+        .glitch::after {
+            left: -2px;
+            text-shadow: 2px 0 var(--pink);
+            animation: glitch2 3s infinite linear
+        }
+        
+        @keyframes glitch1 {
+            0%,
+            90%,
+            100% {
+                clip-path: inset(50% 0 50% 0)
+            }
+            20% {
+                clip-path: inset(10% 0 80% 0)
+            }
+            40% {
+                clip-path: inset(60% 0 20% 0)
+            }
+            60% {
+                clip-path: inset(30% 0 55% 0)
+            }
+        }
+        
+        @keyframes glitch2 {
+            0%,
+            85%,
+            100% {
+                clip-path: inset(50% 0 50% 0)
+            }
+            15% {
+                clip-path: inset(70% 0 10% 0)
+            }
+            35% {
+                clip-path: inset(20% 0 70% 0)
+            }
+            55% {
+                clip-path: inset(45% 0 40% 0)
             }
         }
         /* ── NAV ── */
@@ -698,60 +767,68 @@
             flex-wrap: wrap;
         }
         
-        .resume-btn {
+        .btn-primary {
             display: inline-flex;
             align-items: center;
             gap: .6rem;
-            padding: .7rem 1.6rem;
-            background: linear-gradient(135deg, var(--ember), var(--gold));
-            color: #000;
+            padding: .8rem 2rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold2);
             font-family: var(--font-code);
-            font-size: .78rem;
-            font-weight: 800;
+            font-size: .76rem;
+            font-weight: 600;
             letter-spacing: .1em;
             text-transform: uppercase;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: opacity .2s, transform .2s;
-            border: none;
+            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
             position: relative;
             overflow: hidden;
+            transition: all .3s;
+            cursor: pointer
         }
         
-        .resume-btn:hover {
-            opacity: .88;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(212, 168, 67, .25);
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s
         }
         
-        .resume-btn svg {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
+        .btn-primary:hover::before {
+            transform: scaleX(1)
         }
         
-        .contact-quick-btn {
+        .btn-primary:hover {
+            color: #000
+        }
+        
+        .btn-primary span {
+            position: relative;
+            z-index: 1
+        }
+        
+        .btn-secondary {
             display: inline-flex;
             align-items: center;
             gap: .6rem;
-            padding: .7rem 1.6rem;
-            border: 1.5px solid var(--border);
+            padding: .8rem 2rem;
+            border: 1px solid rgba(255, 255, 255, .15);
             color: var(--muted);
             font-family: var(--font-code);
-            font-size: .78rem;
-            font-weight: 700;
+            font-size: .76rem;
             letter-spacing: .1em;
             text-transform: uppercase;
-            border-radius: 6px;
+            transition: all .3s;
             cursor: pointer;
-            transition: all .2s;
-            background: none;
+            background: transparent
         }
         
-        .contact-quick-btn:hover {
+        .btn-secondary:hover {
             border-color: var(--gold);
-            color: var(--gold);
-            background: rgba(212, 168, 67, .05);
+            color: var(--gold)
         }
         /* ── HERO PHOTO (from JSX) ── */
         
@@ -3107,57 +3184,6 @@
             border-radius: 6px;
             background: rgba(212, 83, 126, .05);
         }
-        
-        .notion-sections-title {
-            font-family: var(--font-code);
-            font-size: 11px;
-            letter-spacing: .25em;
-            text-transform: uppercase;
-            color: rgba(237, 232, 216, .35);
-            margin-bottom: 20px;
-        }
-        
-        .notion-sections-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 12px;
-        }
-        
-        .notion-sec-card {
-            padding: 1.4rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, .06);
-            background: rgba(8, 8, 22, .6);
-            transition: border-color .25s, background .25s, transform .25s;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .notion-sec-card:hover {
-            transform: translateY(-6px);
-        }
-        
-        .notion-sec-icon {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        
-        .notion-sec-name {
-            font-family: var(--font-hero);
-            font-size: 16px;
-            letter-spacing: .04em;
-            margin-bottom: 6px;
-            transition: color .25s;
-        }
-        
-        .notion-sec-desc {
-            font-family: "Georgia,serif";
-            font-size: 12px;
-            font-style: italic;
-            color: rgba(237, 232, 216, .42);
-            line-height: 1.55;
-        }
         /* ── CONTACT ── */
         
         #contact-section {
@@ -4146,6 +4172,154 @@
                 display: none;
             }
         }
+        /* CINEMA TEASER 
+        
+        #cinema-section {
+            border-top: 1px solid var(--border)
+        }
+        
+        .cinema-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center
+        }
+        
+        .cinema-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            border: 1px solid rgba(255, 107, 53, .3);
+            border-radius: 20px;
+            background: rgba(255, 107, 53, .06);
+            font-family: var(--font-code);
+            font-size: .65rem;
+            color: var(--ember);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem
+        }
+        
+        .cinema-badge span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--ember);
+            box-shadow: 0 0 6px var(--ember);
+            animation: blink 1.8s infinite
+        }
+        
+        .cinema-title {
+            font-family: var(--font-hero);
+            font-size: clamp(1.8rem, 3.5vw, 3rem);
+            color: #fff;
+            margin-bottom: 1rem;
+            letter-spacing: .05em
+        }
+        
+        .cinema-desc {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: .93rem;
+            margin-bottom: 1.5rem
+        }
+        
+        .cinema-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .75rem 1.8rem;
+            background: linear-gradient(135deg, var(--ember), var(--gold));
+            color: #000;
+            font-family: var(--font-code);
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: opacity .2s, transform .2s
+        }
+        
+        .cinema-btn:hover {
+            opacity: .88;
+            transform: translateY(-2px)
+        }
+        
+        .cinema-preview {
+            border-radius: 12px;
+            border: 1px solid rgba(255, 107, 53, .2);
+            background: rgba(10, 10, 25, .8);
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .5)
+        }
+        
+        .cinema-thumb {
+            position: relative;
+            height: 180px;
+            background: linear-gradient(135deg, #1a0800, #0d0a00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden
+        }
+        
+        .cinema-play {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 107, 53, .8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all .3s;
+            border: 2px solid rgba(255, 255, 255, .3)
+        }
+        
+        .cinema-play:hover {
+            background: var(--ember);
+            transform: scale(1.1)
+        }
+        
+        .cinema-info {
+            padding: 1.5rem
+        }
+        
+        .cinema-channel {
+            font-family: var(--font-hero);
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: .5rem;
+            letter-spacing: .05em
+        }
+        
+        .cinema-stat-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem
+        }
+        
+        .cinema-stat {
+            text-align: center
+        }
+        
+        .cinema-stat-num {
+            font-family: var(--font-hero);
+            font-size: 1.4rem;
+            color: var(--ember);
+            line-height: 1
+        }
+        
+        .cinema-stat-label {
+            font-family: var(--font-code);
+            font-size: .62rem;
+            color: var(--muted);
+            letter-spacing: .1em;
+            text-transform: uppercase
+        }
+        */
     </style>
 </head>
 
@@ -4195,15 +4369,20 @@
     <!-- THREE.JS BACKGROUND CONTAINER (from JSX) -->
     <div id="threeBg" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></div>
 
-    <!-- PRELOADER -->
+
+    <!-- NEW GLITCH _ PRELOADER -->
     <div id="preloader">
-        <div class="pre-dragon">🐉</div>
-        <div class="pre-name">MEET<br>MARU</div>
+        <div class="pre-scanlines"></div>
+        <div style="font-family:var(--font-code);font-size:.65rem;letter-spacing:.3em;color:rgba(0,229,255,.4);text-transform:uppercase;margin-bottom:.5rem">INITIALIZING SYSTEMS</div>
+        <div class="pre-logo glitch" data-text="MEET MARU">MEET MARU</div>
+        <div class="pre-sub">AI/ML Engineer · Builder · Creator</div>
         <div class="pre-bar-wrap">
             <div class="pre-bar" id="preBar"></div>
         </div>
         <div class="pre-pct" id="prePct">0%</div>
+        <div style="font-family:var(--font-code);font-size:.62rem;letter-spacing:.2em;color:rgba(0,229,255,.3);margin-top:.5rem" id="preStatus">Booting neural networks...</div>
     </div>
+
 
     <!-- NAV -->
     <nav id="nav">
@@ -4214,18 +4393,20 @@
             </a>
             <div class="nav-status">Available</div>
         </div>
+
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#experience">XP</a>
             <a href="#certifications">Certificates</a>
-            <a href="writing.html">Writing</a>
-            <a href="#newsletter">Newsletter</a>
+            <a href="#notion">Notion</a>
             <a href="#contact-section">Contact</a>
             <a href="resume.pdf" target="_blank">Resume</a>
+            <a href="writing.html" class="nav-links2">📝 Writing</a>
+            <a href="cinema.html" class="nav-links2">🎬 Cinema</a>
         </div>
-        <a href="mailto:meetmaru149@gmail.com?subject=Hiring%20Inquiry" class="nav-hire"><span>Hire Me ↗</span></a>
+        <a href="mailto:meetmaru149@gmail.com?subject=Hiring%20Inquiry" class="btn-primary nav-hire-btn"><span>Hire Me ↗</span></a>
         <button class="hamburger" id="hamBtn" onclick="toggleMob()" aria-label="Menu">
         <span></span><span></span><span></span>
     </button>
@@ -4251,20 +4432,19 @@
             <div class="hero-left">
                 <div class="hero-eyebrow"><span>CSE ( AI &amp; ML ) · Mumbai, India · 2024–2028</span></div>
                 <h1 class="hero-name">
-                    <span>MEET</span><br>
+                    <span class="line1 glitch" data-text="MEET">MEET</span><br>
                     <span class="stroke">MARU</span>
                 </h1>
                 <div class="hero-sub">
                     <p id="heroTypeText">AI Builder · ML Explorer · Web Developer 🐉</p>
                 </div>
                 <div class="hero-actions">
-                    <button class="resume-btn" onclick="downloadResume()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Download Resume
-                </button>
-                    <button class="contact-quick-btn" onclick="document.getElementById('contact-section').scrollIntoView({behavior:'smooth'})">
-                    Let's Talk ↗
-                </button>
+                    <button class="btn-primary" onclick="downloadResume()">
+        <span>⬇ Download Resume</span>
+    </button>
+                    <button class="btn-secondary" onclick="document.getElementById('contact-section').scrollIntoView({behavior:'smooth'})">
+        Let's Talk ↗
+    </button>
                 </div>
                 <!-- Stats row (from JSX hero) -->
                 <div style="display:flex;gap:3vw;margin-top:48px;padding-top:28px;border-top:1px solid rgba(212,168,67,.1);flex-wrap:wrap;opacity:0;animation:slideUp .8s ease 1.4s forwards;">
@@ -4285,6 +4465,8 @@
                         <div style="font-family:var(--font-code);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(237,232,216,.4);margin-top:4px;">CSI Body</div>
                     </div>
                 </div>
+
+
             </div>
             <div class="hero-photo-wrap" id="heroPhoto" onclick="triggerExplosion(event,'#9B8FE8')">
                 <div class="hero-photo-ring"></div>
@@ -4845,7 +5027,7 @@
             <div class="carousel-viewport">
                 <div class="carousel-track" id="certTrack">
                     <div class="cert-3d-card" onclick="openLb(0)">
-                        <div class="cert-img-wrap"><img src="NCRENB_STUDENT_VOL.jpg" alt="NCRENB" loading="lazy"><span class="cert-img-emoji">🎖️</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/NCRENB_STUDENT_VOL.jpg" alt="NCRENB" loading="lazy"><span class="cert-img-emoji">🎖️</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-gold">🏛️ VIVA Institute</span>
                             <div class="cert-info-title">Student Volunteer — NCRENB 2026</div>
                             <div class="cert-info-sub">National Conference on Role of Engineers in Nation Building</div>
@@ -4853,7 +5035,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(1)">
-                        <div class="cert-img-wrap"><img src="VICE_PRESIDENT.jpg" alt="VP Certificate" loading="lazy"><span class="cert-img-emoji">🏅</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/VICE_PRESIDENT.jpg" alt="VP Certificate" loading="lazy"><span class="cert-img-emoji">🏅</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-violet">🤖 CSE AI&ML Dept</span>
                             <div class="cert-info-title">Certificate of Appreciation — Vice President</div>
                             <div class="cert-info-sub">Outstanding contributions &amp; dedication to the Committee</div>
@@ -4861,7 +5043,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(2)">
-                        <div class="cert-img-wrap"><img src="HITASHI_26_FIRST_VOLLEY.jpg" alt="Volleyball" loading="lazy"><span class="cert-img-emoji">🥇</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/HITASHI_26_FIRST_VOLLEY.jpg" alt="Volleyball" loading="lazy"><span class="cert-img-emoji">🥇</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-ember">🏐 HITAISHI 2026</span>
                             <div class="cert-info-title">1st Place — Volleyball Tournament</div>
                             <div class="cert-info-sub">SE (AIML) · VIT Dept · VIVA Group Inter-Institute Sports Fest</div>
@@ -4869,7 +5051,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(3)">
-                        <div class="cert-img-wrap"><img src="JALLOSH_SYJC_CRICKET.jpg" alt="Cricket 2nd" loading="lazy"><span class="cert-img-emoji">🥈</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/JALLOSH_SYJC_CRICKET.jpg" alt="Cricket 2nd" loading="lazy"><span class="cert-img-emoji">🥈</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-crimson">🏏 JALLOSH 2023</span>
                             <div class="cert-info-title">2nd Position — Cricket Tournament</div>
                             <div class="cert-info-sub">Swami Vivekanand International School · Inter-House Cricket</div>
@@ -4877,7 +5059,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(4)">
-                        <div class="cert-img-wrap"><img src="SIH_2025.jpg" alt="SIH" loading="lazy"><span class="cert-img-emoji">⚡</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/SIH_2025.jpg" alt="SIH" loading="lazy"><span class="cert-img-emoji">⚡</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-teal">💡 SIH 2025</span>
                             <div class="cert-info-title">Campus Internal Hackathon 2025</div>
                             <div class="cert-info-sub">Team RailNova · Smart India Hackathon · VIVA Institute</div>
@@ -4885,7 +5067,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(5)">
-                        <div class="cert-img-wrap"><img src="JUNIOR_GRP_2019_CRIKET.jpg" alt="Cricket Winner" loading="lazy"><span class="cert-img-emoji">🏆</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/JUNIOR_GRP_2019_CRIKET.jpg" alt="Cricket Winner" loading="lazy"><span class="cert-img-emoji">🏆</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-gold">🏏 R.C. Patel H.S.</span>
                             <div class="cert-info-title">Certificate of Merit — Cricket Winner</div>
                             <div class="cert-info-sub">Junior Group Cricket · Class VIII-G · Borivli Education Society</div>
@@ -4893,7 +5075,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(6)">
-                        <div class="cert-img-wrap"><img src="TECHCHASE_2025.jpg" alt="TechChase" loading="lazy"><span class="cert-img-emoji">🛠️</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/TECHCHASE_2025.jpg" alt="TechChase" loading="lazy"><span class="cert-img-emoji">🛠️</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-violet">💻 TECHCHASE 2025</span>
                             <div class="cert-info-title">Organizing Member — AI Tech Battle</div>
                             <div class="cert-info-sub">Outstanding leadership &amp; planning at VIVA's Annual Tech Fest</div>
@@ -4901,7 +5083,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(7)">
-                        <div class="cert-img-wrap"><img src="DR.HOMI.jpg" alt="Homi Bhabha" loading="lazy"><span class="cert-img-emoji">🔬</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/DR.HOMI.jpg" alt="Homi Bhabha" loading="lazy"><span class="cert-img-emoji">🔬</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-ember">🧪 GBSTA</span>
                             <div class="cert-info-title">Dr. Homi Bhabha Balvaidnyanik Competition</div>
                             <div class="cert-info-sub">Science Talent Search · Std. Sixth · RC Patel HS · Mumbai Region</div>
@@ -4909,7 +5091,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(8)">
-                        <div class="cert-img-wrap"><img src="UI_UX_WORKSHOP.jpg" alt="UI/UX Workshop" loading="lazy"><span class="cert-img-emoji">🎨</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/UI_UX_WORKSHOP.jpg" alt="UI/UX Workshop" loading="lazy"><span class="cert-img-emoji">🎨</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-ember">🧪 Clyxn X Sorxn</span>
                             <div class="cert-info-title">UI/UX Workshop Competition</div>
                             <div class="cert-info-sub">Design Thinking · Color Theory · Prototyping · Figma · VIVA Institute</div>
@@ -4918,7 +5100,7 @@
                     </div>
                     <!-- Duplicate for loop -->
                     <div class="cert-3d-card" onclick="openLb(0)">
-                        <div class="cert-img-wrap"><img src="NCRENB_STUDENT_VOL.jpg" alt="NCRENB" loading="lazy"><span class="cert-img-emoji">🎖️</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/NCRENB_STUDENT_VOL.jpg" alt="NCRENB" loading="lazy"><span class="cert-img-emoji">🎖️</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-gold">🏛️ VIVA Institute</span>
                             <div class="cert-info-title">Student Volunteer — NCRENB 2026</div>
                             <div class="cert-info-sub">National Conference on Role of Engineers in Nation Building</div>
@@ -4926,7 +5108,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(1)">
-                        <div class="cert-img-wrap"><img src="VICE_PRESIDENT.jpg" alt="VP Certificate" loading="lazy"><span class="cert-img-emoji">🏅</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/VICE_PRESIDENT.jpg" alt="VP Certificate" loading="lazy"><span class="cert-img-emoji">🏅</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-violet">🤖 CSE AI&ML Dept</span>
                             <div class="cert-info-title">Certificate of Appreciation — Vice President</div>
                             <div class="cert-info-sub">Outstanding contributions &amp; dedication to the Committee</div>
@@ -4934,7 +5116,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(2)">
-                        <div class="cert-img-wrap"><img src="HITASHI_26_FIRST_VOLLEY.jpg" alt="Volleyball" loading="lazy"><span class="cert-img-emoji">🥇</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/HITASHI_26_FIRST_VOLLEY.jpg" alt="Volleyball" loading="lazy"><span class="cert-img-emoji">🥇</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-ember">🏐 HITAISHI 2026</span>
                             <div class="cert-info-title">1st Place — Volleyball Tournament</div>
                             <div class="cert-info-sub">SE (AIML) · VIT Dept · VIVA Group Inter-Institute Sports Fest</div>
@@ -4942,7 +5124,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(3)">
-                        <div class="cert-img-wrap"><img src="JALLOSH_SYJC_CRICKET.jpg" alt="Cricket 2nd" loading="lazy"><span class="cert-img-emoji">🥈</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/JALLOSH_SYJC_CRICKET.jpg" alt="Cricket 2nd" loading="lazy"><span class="cert-img-emoji">🥈</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-crimson">🏏 JALLOSH 2023</span>
                             <div class="cert-info-title">2nd Position — Cricket Tournament</div>
                             <div class="cert-info-sub">Swami Vivekanand International School · Inter-House Cricket</div>
@@ -4950,7 +5132,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(4)">
-                        <div class="cert-img-wrap"><img src="SIH_2025.jpg" alt="SIH" loading="lazy"><span class="cert-img-emoji">⚡</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/SIH_2025.jpg" alt="SIH" loading="lazy"><span class="cert-img-emoji">⚡</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-teal">💡 SIH 2025</span>
                             <div class="cert-info-title">Campus Internal Hackathon 2025</div>
                             <div class="cert-info-sub">Team RailNova · Smart India Hackathon · VIVA Institute</div>
@@ -4958,7 +5140,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(5)">
-                        <div class="cert-img-wrap"><img src="JUNIOR_GRP_2019_CRIKET.jpg" alt="Cricket Winner" loading="lazy"><span class="cert-img-emoji">🏆</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/JUNIOR_GRP_2019_CRIKET.jpg" alt="Cricket Winner" loading="lazy"><span class="cert-img-emoji">🏆</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-gold">🏏 R.C. Patel H.S.</span>
                             <div class="cert-info-title">Certificate of Merit — Cricket Winner</div>
                             <div class="cert-info-sub">Junior Group Cricket · Class VIII-G · Borivli Education Society</div>
@@ -4966,7 +5148,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(6)">
-                        <div class="cert-img-wrap"><img src="TECHCHASE_2025.jpg" alt="TechChase" loading="lazy"><span class="cert-img-emoji">🛠️</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/TECHCHASE_2025.jpg" alt="TechChase" loading="lazy"><span class="cert-img-emoji">🛠️</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-violet">💻 TECHCHASE 2025</span>
                             <div class="cert-info-title">Organizing Member — AI Tech Battle</div>
                             <div class="cert-info-sub">Outstanding leadership &amp; planning at VIVA's Annual Tech Fest</div>
@@ -4974,7 +5156,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(7)">
-                        <div class="cert-img-wrap"><img src="DR.HOMI.jpg" alt="Homi Bhabha" loading="lazy"><span class="cert-img-emoji">🔬</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/DR.HOMI.jpg" alt="Homi Bhabha" loading="lazy"><span class="cert-img-emoji">🔬</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-ember">🧪 GBSTA</span>
                             <div class="cert-info-title">Dr. Homi Bhabha Balvaidnyanik Competition</div>
                             <div class="cert-info-sub">Science Talent Search · Std. Sixth · RC Patel HS · Mumbai Region</div>
@@ -4982,7 +5164,7 @@
                         </div>
                     </div>
                     <div class="cert-3d-card" onclick="openLb(8)">
-                        <div class="cert-img-wrap"><img src="UI_UX_WORKSHOP.jpg" alt="UI/UX Workshop" loading="lazy"><span class="cert-img-emoji">🎨</span><span class="cert-expand-hint">⤢ View</span></div>
+                        <div class="cert-img-wrap"><img src="/UI_UX_WORKSHOP.jpg" alt="UI/UX Workshop" loading="lazy"><span class="cert-img-emoji">🎨</span><span class="cert-expand-hint">⤢ View</span></div>
                         <div class="cert-info"><span class="cert-info-badge cib-ember">🧪 Clyxn X Sorxn</span>
                             <div class="cert-info-title">UI/UX Workshop Competition</div>
                             <div class="cert-info-sub">Design Thinking · Color Theory · Prototyping · Figma · VIVA Institute</div>
@@ -5098,52 +5280,54 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Section cards grid -->
-            <div style="margin-top:4rem;" class="reveal">
-                <div class="notion-sections-title">// What you'll find inside</div>
-                <div class="notion-sections-grid" id="notionSections">
-                    <a href="https://useful-bread-df4.notion.site/The-Lost-Pages-22f9fa9b124380419650f94b899f11b8" target="_blank" rel="noopener" class="notion-sec-card" style="border-color:rgba(212,83,126,.2);" onmouseenter="this.style.borderColor='#D4537E';this.style.background='rgba(212,83,126,.08)'"
-                        onmouseleave="this.style.borderColor='rgba(212,83,126,.2)';this.style.background='rgba(8,8,22,.6)'">
-                        <div class="notion-sec-icon">💌</div>
-                        <div class="notion-sec-name" style="color:#D4537E;">To You, Unsent One</div>
-                        <div class="notion-sec-desc">Letters never sent but meant everything.</div>
-                    </a>
-                    <a href="https://useful-bread-df4.notion.site/The-Lost-Pages-22f9fa9b124380419650f94b899f11b8" target="_blank" rel="noopener" class="notion-sec-card" style="border-color:rgba(239,159,39,.2);" onmouseenter="this.style.borderColor='#EF9F27';this.style.background='rgba(239,159,39,.08)'"
-                        onmouseleave="this.style.borderColor='rgba(239,159,39,.2)';this.style.background='rgba(8,8,22,.6)'">
-                        <div class="notion-sec-icon">❤️</div>
-                        <div class="notion-sec-name" style="color:#EF9F27;">Love</div>
-                        <div class="notion-sec-desc">Stories of falling, staying, or breaking.</div>
-                    </a>
-                    <a href="https://useful-bread-df4.notion.site/The-Lost-Pages-22f9fa9b124380419650f94b899f11b8" target="_blank" rel="noopener" class="notion-sec-card" style="border-color:rgba(155,143,232,.2);" onmouseenter="this.style.borderColor='#9B8FE8';this.style.background='rgba(155,143,232,.08)'"
-                        onmouseleave="this.style.borderColor='rgba(155,143,232,.2)';this.style.background='rgba(8,8,22,.6)'">
-                        <div class="notion-sec-icon">🌫️</div>
-                        <div class="notion-sec-name" style="color:#9B8FE8;">Left Unsaid</div>
-                        <div class="notion-sec-desc">Separation, distance, aching silence.</div>
-                    </a>
-                    <a href="https://useful-bread-df4.notion.site/The-Lost-Pages-22f9fa9b124380419650f94b899f11b8" target="_blank" rel="noopener" class="notion-sec-card" style="border-color:rgba(67,212,74,.2);" onmouseenter="this.style.borderColor='#43D44A';this.style.background='rgba(67,212,74,.08)'"
-                        onmouseleave="this.style.borderColor='rgba(67,212,74,.2)';this.style.background='rgba(8,8,22,.6)'">
-                        <div class="notion-sec-icon">⚡</div>
-                        <div class="notion-sec-name" style="color:#43D44A;">One-Liners</div>
-                        <div class="notion-sec-desc">Micro-poetry that hits hard.</div>
-                    </a>
-                    <a href="https://useful-bread-df4.notion.site/The-Lost-Pages-22f9fa9b124380419650f94b899f11b8" target="_blank" rel="noopener" class="notion-sec-card" style="border-color:rgba(55,138,221,.2);" onmouseenter="this.style.borderColor='#378ADD';this.style.background='rgba(55,138,221,.08)'"
-                        onmouseleave="this.style.borderColor='rgba(55,138,221,.2)';this.style.background='rgba(8,8,22,.6)'">
-                        <div class="notion-sec-icon">📒</div>
-                        <div class="notion-sec-name" style="color:#378ADD;">Meri Diary Se</div>
-                        <div class="notion-sec-desc">Raw entries — the unfiltered heart.</div>
-                    </a>
-                    <a href="https://useful-bread-df4.notion.site/The-Lost-Pages-22f9fa9b124380419650f94b899f11b8" target="_blank" rel="noopener" class="notion-sec-card" style="border-color:rgba(255,107,53,.2);" onmouseenter="this.style.borderColor='#FF6B35';this.style.background='rgba(255,107,53,.08)'"
-                        onmouseleave="this.style.borderColor='rgba(255,107,53,.2)';this.style.background='rgba(8,8,22,.6)'">
-                        <div class="notion-sec-icon">🔮</div>
-                        <div class="notion-sec-name" style="color:#FF6B35;">Morals &amp; More</div>
-                        <div class="notion-sec-desc">Reflections, lessons, everything else.</div>
-                    </a>
+        </div>
+    </section>
+    <!-- CINEMA TEASER --
+         <section id="cinema-section" class="section">
+        <div class="section-head reveal">
+            <div class="s-index">06 — Cinema</div>
+            <h2 class="s-title">FRAMES &amp; <span class="hollow">STORIES</span></h2>
+        </div>
+        <div class="cinema-inner">
+            <div class="reveal reveal-d1">
+                <div class="cinema-preview">
+                    <div class="cinema-thumb">
+                        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,107,53,.15),rgba(212,168,67,.1));"></div>
+                        <div style="font-family:var(--font-hero);font-size:4rem;opacity:.2;position:absolute">🎬</div>
+                        <a href="cinema.html" class="cinema-play">▶</a>
+                    </div>
+                    <div class="cinema-info">
+                        <div class="cinema-channel">Meet Maru Cinema</div>
+                        <div style="font-family:var(--font-code);font-size:.68rem;color:var(--muted);letter-spacing:.1em;margin-bottom:1rem">// YouTube · Cinematography · Storytelling</div>
+                        <div class="cinema-stat-row">
+                            <div class="cinema-stat">
+                                <div class="cinema-stat-num">🎬</div>
+                                <div class="cinema-stat-label">Filmmaking</div>
+                            </div>
+                            <div class="cinema-stat">
+                                <div class="cinema-stat-num">📽️</div>
+                                <div class="cinema-stat-label">Short Films</div>
+                            </div>
+                            <div class="cinema-stat">
+                                <div class="cinema-stat-num">✂️</div>
+                                <div class="cinema-stat-label">Editing</div>
+                            </div>
+                        </div>
+                        <p style="font-size:.82rem;color:var(--muted);line-height:1.6">Frames that tell stories. Every shot is intentional. Every cut has meaning.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal">
+                <div class="cinema-badge"><span></span>Cinema &amp; Filmmaking</div>
+                <h3 class="cinema-title">Cinematography Notes &amp; Visual Storytelling</h3>
+                <p class="cinema-desc">Beyond code lies a lens. I explore cinematography, short filmmaking, and visual narratives through my YouTube channel. How light, framing, and editing shapes emotion — and how that informs my design philosophy.</p>
+                <p class="cinema-desc">Every frame is a thought. Every edit is a decision. Cinema teaches me to think in systems — which makes me a better AI engineer.</p>
+                <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem">
+                    <a href="cinema.html" class="cinema-btn">🎬 Visit Cinema Page ↗</a>
                 </div>
             </div>
         </div>
-    </section>
-
+    </section> -->
     <!-- NEWSLETTER -->
     <section id="newsletter" class="section">
         <div class="nl-inner">
@@ -5310,25 +5494,30 @@
     <script>
         const BACKEND_URL = 'http://localhost:3001';
 
-        /* ── PRELOADER ── */
+        /* ── new glitch PRELOADER ── */
         (function() {
-            let p = 0;
+            const msgs = ['Booting neural networks...', 'Loading AI systems...', 'Calibrating holograms...', 'Initializing Meet.exe...', 'Systems online.'];
+            let p = 0,
+                mi = 0;
             const bar = document.getElementById('preBar'),
                 pct = document.getElementById('prePct'),
-                pre = document.getElementById('preloader');
+                pre = document.getElementById('preloader'),
+                st = document.getElementById('preStatus');
             const iv = setInterval(() => {
-                p += Math.random() * 14 + 4;
+                p += Math.random() * 12 + 4;
                 if (p >= 100) {
                     p = 100;
                     clearInterval(iv);
-                    setTimeout(() => pre.classList.add('done'), 400);
+                    setTimeout(() => pre.classList.add('done'), 400)
                 }
                 bar.style.width = p + '%';
                 pct.textContent = Math.floor(p) + '%';
-            }, 90);
-        })();
-
-        /* ── SCROLL PROGRESS BAR (from JSX) ── */
+                if (Math.floor(p) % 20 === 0 && mi < msgs.length - 1) {
+                    mi++;
+                    if (st) st.textContent = msgs[mi];
+                }
+            }, 80);
+        })(); /* ── SCROLL PROGRESS BAR (from JSX) ── */
         (function() {
             const bar = document.getElementById('scrollProgressBar');
             window.addEventListener('scroll', () => {
