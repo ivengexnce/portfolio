@@ -4148,6 +4148,9 @@
             .tools-mosaic {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .nav-hire {
+                display: none;
+            }
             .dgrid {
                 grid-template-columns: 1fr;
             }
@@ -4403,13 +4406,15 @@
             <a href="#notion">Notion</a>
             <a href="#contact-section">Contact</a>
             <a href="resume.pdf" target="_blank">Resume</a>
-            <a href="writing.html" class="nav-links2">📝 Writing</a>
+            <a href="writing.html" class="nav-links2">Writing</a>
             <a href="cinema.html" class="nav-links2">🎬 Cinema</a>
         </div>
         <a href="mailto:meetmaru149@gmail.com?subject=Hiring%20Inquiry" class="btn-primary nav-hire"><span>Hire Me ↗</span></a>
         <button class="hamburger" id="hamBtn" onclick="toggleMob()" aria-label="Menu">
         <span></span><span></span><span></span>
     </button>
+
+
     </nav>
     <div id="mob-menu">
         <a href="#about" onclick="toggleMob()">About</a>
@@ -4435,9 +4440,7 @@
                     <span class="line1 glitch" data-text="MEET">MEET</span><br>
                     <span class="stroke">MARU</span>
                 </h1>
-                <div class="hero-sub">
-                    <p id="heroTypeText">AI Builder · ML Explorer · Web Developer 🐉</p>
-                </div>
+                <div class="typewriter"></div>
                 <div class="hero-actions">
                     <button class="btn-primary" onclick="downloadResume()">
         <span>⬇ Download Resume</span>
@@ -4457,7 +4460,7 @@
                         <div style="font-family:var(--font-code);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(237,232,216,.4);margin-top:4px;">Projects</div>
                     </div>
                     <div>
-                        <div style="font-family:var(--font-hero);font-size:clamp(1.6rem,3.5vw,2.8rem);color:var(--gold);line-height:1;">7</div>
+                        <div id="hero-cert-count" style="font-family:var(--font-hero);font-size:clamp(1.6rem,3.5vw,2.8rem);color:var(--gold);line-height:1;">9</div>
                         <div style="font-family:var(--font-code);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(237,232,216,.4);margin-top:4px;">Certifications</div>
                     </div>
                     <div>
@@ -5901,44 +5904,75 @@
         }
 
         /* ── TYPEWRITER ── */
-         (function() {
-            const words = ['AI Builder · Python <span style="color: var(--acid);">&</span> Web Developer ', 'ML Explorer · Open to Internships · Mumbai, India '];
-            let wi = 0,
-                ci = 0,
-                del = false;
-            const el = document.getElementById('heroTypeText');
-            if (!el) return;
+        (function() {
+            const words = [
+                'AI Builder · Python <span style="color: var(--acid);">&</span> Web Developer',
+                'ML Explorer · Open to Internships · Mumbai, India'
+            ];
+
+            const el = document.querySelector('.typewriter'); // Make sure to add this class to your target element
+            let wi = 0; // word index
+            let ci = 0; // character index
+            let del = false; // deleting mode
+            let timeoutId = null;
 
             function tick() {
                 const w = words[wi];
-                if (!del) {
-                    ci++;
-                    if (ci > w.length) {
-                        del = true;
-                        setTimeout(tick, 1800);
-                        return
-                    }
-                } else {
+
+                if (del) {
                     ci--;
-                    if (ci < 0) {
-                        ci = 0;
-                        del = false;
-                        wi = (wi + 1) % words.length;
-                        setTimeout(tick, 500);
-                        return
-                    }
+                } else {
+                    ci++;
                 }
-                el.textContent = w.slice(0, ci);
-                el.innerHTML = `-- <em style="color:white); font-style:semi-bold ; text-color:white; font-family:times new roman">${w.slice(0,ci)}<span style="border-right : 2px solid white; animation : blink 1s infinite; margin-left:1px">&nbsp;</span></em> &middot;`;
-                setTimeout(tick, del ? 60 : 110);
+
+                // Update the displayed text with proper HTML
+                el.innerHTML = `-- <em style="color:white; font-style:italic; font-weight:600; font-family:'Times New Roman', serif;">
+            ${w.slice(0, ci)}
+            <span style="border-right: 2px solid white; animation: blink 1s infinite; margin-left: 2px;">&nbsp;</span>
+        </em> &middot;`;
+
+                if (!del && ci > w.length) {
+                    // Finished typing current word
+                    del = true;
+                    timeoutId = setTimeout(tick, 1800); // Pause before deleting
+                    return;
+                }
+
+                if (del && ci <= 0) {
+                    // Finished deleting
+                    del = false;
+                    wi = (wi + 1) % words.length;
+                    timeoutId = setTimeout(tick, 500); // Pause before typing next word
+                    return;
+                }
+
+                // Normal typing/deleting speed
+                timeoutId = setTimeout(tick, del ? 50 : 90);
             }
+
+            // Start the animation
             tick();
+
+            // Optional: Cleanup on page unload (good practice)
+            window.addEventListener('beforeunload', () => {
+                if (timeoutId) clearTimeout(timeoutId);
+            });
         })();
 
+        /* ── RESUME DOWNLOAD with tracking ── */
+        async function downloadResume() {
+            // Track the download (send to backend)
+            await fetch('http://localhost:3001/api/resume-download', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    source: 'portfolio_button'
+                })
+            }).catch(() => {}); // don't break the download if backend is down
 
-
-        /* ── RESUME DOWNLOAD ── */
-        function downloadResume() {
+            // Now actually download the PDF
             const link = document.createElement('a');
             link.href = '/resume.pdf';
             link.download = 'Meet_Maru_Resume.pdf';
@@ -6204,6 +6238,21 @@
                 if (!raf) raf = requestAnimationFrame(tick);
             });
         });
+        /* ── AUTO UPDATE CERTIFICATIONS COUNT IN HERO ── */
+        (function() {
+            const heroCount = document.getElementById('hero-cert-count');
+            if (!heroCount) return;
+
+            // Count from your carousel data (lbData)
+            const totalCerts = lbData.length;
+
+            // Update hero stat
+            heroCount.textContent = totalCerts;
+
+            // Also update the carousel subtitle
+            const countDisplay = document.getElementById('certCountDisplay');
+            if (countDisplay) countDisplay.textContent = `${totalCerts} earned`;
+        })();
     </script>
 </body>
 
