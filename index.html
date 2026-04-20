@@ -4406,7 +4406,7 @@
             <a href="writing.html" class="nav-links2">📝 Writing</a>
             <a href="cinema.html" class="nav-links2">🎬 Cinema</a>
         </div>
-        <a href="mailto:meetmaru149@gmail.com?subject=Hiring%20Inquiry" class="btn-primary nav-hire-btn"><span>Hire Me ↗</span></a>
+        <a href="mailto:meetmaru149@gmail.com?subject=Hiring%20Inquiry" class="btn-primary nav-hire"><span>Hire Me ↗</span></a>
         <button class="hamburger" id="hamBtn" onclick="toggleMob()" aria-label="Menu">
         <span></span><span></span><span></span>
     </button>
@@ -5901,8 +5901,8 @@
         }
 
         /* ── TYPEWRITER ── */
-        (function() {
-            const words = ['AI Builder · ML Explorer · Web Developer 🐉', 'AI Systems Builder 🤖', 'Cinematographer 🎬', 'Writer & Storyteller ✍️', 'Open to Internships · Mumbai, India 🚀'];
+         (function() {
+            const words = ['AI Builder · Python <span style="color: var(--acid);">&</span> Web Developer ', 'ML Explorer · Open to Internships · Mumbai, India '];
             let wi = 0,
                 ci = 0,
                 del = false;
@@ -5915,8 +5915,8 @@
                     ci++;
                     if (ci > w.length) {
                         del = true;
-                        setTimeout(tick, 2000);
-                        return;
+                        setTimeout(tick, 1800);
+                        return
                     }
                 } else {
                     ci--;
@@ -5925,14 +5925,17 @@
                         del = false;
                         wi = (wi + 1) % words.length;
                         setTimeout(tick, 500);
-                        return;
+                        return
                     }
                 }
-                el.innerHTML = `<em style="color:white;font-style:normal">${w.slice(0,ci)}<span style="border-right:2px solid var(--gold);animation:blink 1s infinite;margin-left:1px">&nbsp;</span></em>`;
+                el.textContent = w.slice(0, ci);
+                el.innerHTML = `-- <em style="color:white); font-style:semi-bold ; text-color:white; font-family:times new roman">${w.slice(0,ci)}<span style="border-right : 2px solid white; animation : blink 1s infinite; margin-left:1px">&nbsp;</span></em> &middot;`;
                 setTimeout(tick, del ? 60 : 110);
             }
             tick();
         })();
+
+
 
         /* ── RESUME DOWNLOAD ── */
         function downloadResume() {
